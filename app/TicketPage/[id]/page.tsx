@@ -1,3 +1,4 @@
+import TicketForm from "@/app/(components)/TicketForm"
 
 type TicketPageProps = {
   params: {id: number}
@@ -5,9 +6,9 @@ type TicketPageProps = {
 
 const TicketPage = ({params}: TicketPageProps) => {
   return (
-    <div>
-      {params.id}
-    </div>
+    <>
+      <TicketForm />
+    </>
   )
 }
 
