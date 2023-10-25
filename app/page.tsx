@@ -1,9 +1,9 @@
-import React from 'react'
+import TicketCard from './(components)/TicketCard'
 
 const Daschboard = () => {
   return (
     <div>
-      Dashboard
+      <TicketCard />
     </div>
   )
 }
