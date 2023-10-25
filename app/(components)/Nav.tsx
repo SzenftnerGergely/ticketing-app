@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Daschboard = () => {
+const Nav = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Daschboard = () => {
   )
 }
 
-export default Daschboard
+export default Nav
