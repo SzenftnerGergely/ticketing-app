@@ -4,6 +4,7 @@ const Daschboard = () => {
   return (
     <div>
       <TicketCard />
+      <TicketCard />
     </div>
   )
 }
