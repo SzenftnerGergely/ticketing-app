@@ -30,20 +30,34 @@ const TicketForm = ({ticket}) => {
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        const res = await fetch("/api/Tickets", {
+        e.preventDefault();
+
+        if (EDITMODE) {
+          const res = await fetch(`/api/Tickets/${ticket._id}`, {
+            method: "PUT",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({ formData }),
+          });
+          if (!res.ok) {
+            throw new Error("Failed to update ticket");
+          }
+        } else {
+          const res = await fetch("/api/Tickets", {
             method: "POST",
             body: JSON.stringify({ formData }),
             //@ts-ignore
             "Content-Type": "application/json",
-        })
-        if (!res.ok) {
-            throw new Error("Failed to create ticket.")
+          });
+          if (!res.ok) {
+            throw new Error("Failed to create ticket");
+          }
         }
-
-        router.refresh
-        router.push("/")
-    }
+    
+        router.refresh();
+        router.push("/");
+      };
 
     const startingTicketData = {
         title: "",
