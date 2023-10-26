@@ -1,7 +1,7 @@
 import TicketForm from "@/app/(components)/TicketForm"
 
 const getTicketbyId = async (id: string) =>{
-    const res = await fetch(`http://localthost:3000/api/Tickets/${id}`, {
+    const res = await fetch(`http://localhost:3000/api/Tickets/${id}`, {
       cache: 'no-store'
     })
 
@@ -22,11 +22,16 @@ const TicketPage = async ({params}: Props) => {
 
   if(EDITMODE) {
     updateTicketData = await getTicketbyId(params.id)
+    updateTicketData = updateTicketData.foundTicket
+  } else {
+    updateTicketData = {
+      _id: "new"
+    }
   }
 
   return (
     <>
-      <TicketForm />
+      <TicketForm ticket={updateTicketData} />
     </>
   )
 }
