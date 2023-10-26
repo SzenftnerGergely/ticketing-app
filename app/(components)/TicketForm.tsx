@@ -13,6 +13,7 @@ type StartingTicketData = {
 }
 
 const TicketForm = () => {
+    const router = useRouter()
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const value = e.target.value
@@ -24,8 +25,20 @@ const TicketForm = () => {
         }))
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const res = await fetch("/api/Tickets", {
+            method: "POST",
+            body: JSON.stringify({ formData }),
+            //@ts-ignore
+            "Content-Type": "application/json",
+        })
+        if (!res.ok) {
+            throw new Error("Failed to create ticket.")
+        }
 
+        router.refresh
+        router.push("/")
     }
 
     const startingTicketData = {
@@ -58,8 +71,8 @@ const TicketForm = () => {
                 />
                 <label>Description</label>
                 <textarea
-                    id="desciption"
-                    name="desciption"
+                    id="description"
+                    name="description"
                     onChange={handleChange}
                     required={true}
                     value={formData.description}
