@@ -5,7 +5,24 @@ import ProgressDisplay from './ProgressDisplay'
 import StatusDisplay from './StatusDisplay'
 
 type TicketCardProps = {
-    ticket: Ticket
+    ticket: Ticket,
+    id: string
+}
+
+const formatTimestamp = (timestamp: number) => {
+    const options = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+    }
+
+    const date = new Date(timestamp)
+    const formattedDate = date.toLocaleString("en-US", options)
+
+    return formattedDate
 }
 
 const TicketCard = ({ticket}: TicketCardProps) => {
@@ -24,11 +41,11 @@ const TicketCard = ({ticket}: TicketCardProps) => {
             <div className='flex-grow'></div>
             <div className='flex mt-2'>
                 <div className='flex flex-col'>
-                    <p className='text-xs my-1'>{ticket.createdAt}</p>
-                    <ProgressDisplay />
+                    <p className='text-xs my-1'>{formatTimestamp(ticket.createdAt)}</p>
+                    <ProgressDisplay progress={ticket.progress} />
                 </div>
                 <div className='ml-auto flex items-end'>
-                    <StatusDisplay />
+                    <StatusDisplay status={ticket.status} />
                 </div>
             </div>
         </div>
