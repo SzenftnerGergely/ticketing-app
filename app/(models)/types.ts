@@ -6,5 +6,6 @@ export type Ticket = {
     progress: number,
     status: string,
     active: number,
-    createdAt: number
+    createdAt: number,
+    _id: number
 }

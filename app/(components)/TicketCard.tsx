@@ -31,7 +31,7 @@ const TicketCard = ({ticket}: TicketCardProps) => {
             <div className='flex items-center mb-3'>
                 <PriorityDisplay priority={ticket.priority} />
                 <div className='ml-auto'>
-                    <DeleteBlock />
+                    <DeleteBlock id={ticket._id}/>
                 </div>
             </div>
 
