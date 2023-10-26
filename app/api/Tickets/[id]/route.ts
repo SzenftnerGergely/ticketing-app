@@ -1,13 +1,28 @@
 import Ticket from "@/app/(models)/Ticket";
 import { NextResponse } from "next/server";
 
-export async function DELETE(req: Request, {params}) {
-    try {
-        const {id} = params
-        await Ticket.findByIdAndDelete(id) 
-        
-        return NextResponse.json({ message: "Ticket Deleted"}, { status: 200 });
-    } catch (err) {
-        return NextResponse.json({ message: "Error", err }, { status: 500 });
-    }
+type Props = {
+  params: { id: number };
+};
+
+export async function GET(req: Request, { params }: Props) {
+  try {
+    const { id } = params;
+
+    const foundTicket = await Ticket.findOne({ _id: id });
+    return NextResponse.json({ foundTicket }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: "Error", error }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: Request, { params }: Props) {
+  try {
+    const { id } = params;
+    await Ticket.findByIdAndDelete(id);
+
+    return NextResponse.json({ message: "Ticket Deleted" }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: "Error", error }, { status: 500 });
+  }
 }
